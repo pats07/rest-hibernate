@@ -20,9 +20,9 @@ public class DatabaseConfiguration {
 	public DataSource getDatasource() {
 		DriverManagerDataSource datasource = new DriverManagerDataSource();
 		datasource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
-		datasource.setUrl("jdbc:oracle:thin:@localhost:1521:practiceDB");
-		datasource.setUsername("system");
-		datasource.setPassword("pawan$123");
+		datasource.setUrl("jdbc:oracle:thin:@localhost:1521:XXX");
+		datasource.setUsername("XXX");
+		datasource.setPassword("XXXX");
 		if(datasource != null) {
 			System.out.println(datasource);
 		}
