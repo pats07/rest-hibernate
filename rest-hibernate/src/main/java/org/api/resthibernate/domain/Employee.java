@@ -21,9 +21,49 @@ public class Employee {
 	private String employee_name;
 	
 	@Column(name="department")
-	public Department dept;
+	public String dept;
 	
 	@Column(name="salary_pa")
-	public BigDecimal salaryPerAnnum;
-			
+	public BigDecimal salaryPerAnum;
+	
+	public Long getEmpId() {
+		return empId;
+	}
+
+	public void setEmpId(Long empId) {
+		this.empId = empId;
+	}
+
+	public String getEmployee_name() {
+		return employee_name;
+	}
+
+	public void setEmployee_name(String employee_name) {
+		this.employee_name = employee_name;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+
+	public BigDecimal getSalaryPerAnum() {
+		return salaryPerAnum;
+	}
+
+	public void setSalaryPerAnum(BigDecimal salaryPerAnum) {
+		this.salaryPerAnum = salaryPerAnum;
+	}
+
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", employee_name=" + employee_name
+				+ ", dept=" + dept + ", salaryPerAnnum=" + salaryPerAnum + "]";
+	}
+
+	
+	
 }
