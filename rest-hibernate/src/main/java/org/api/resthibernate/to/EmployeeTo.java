@@ -4,9 +4,19 @@ import java.math.BigDecimal;
 
 public class EmployeeTo {
 
+	private Long employeeId;
 	private String name;
 	private Long deptId;
 	private BigDecimal salaryPerAnum;
+
+	
+	public Long getEmployeeId() {
+		return employeeId;
+	}
+
+	public void setEmployeeId(Long employeeId) {
+		this.employeeId = employeeId;
+	}
 
 	public String getName() {
 		return name;

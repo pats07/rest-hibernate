@@ -33,4 +33,34 @@ public class EmployeeService {
 		return repository.saveEmployee(emp);
 	}
 
+	public EmployeeTo updateEmployeeById(EmployeeTo employee) {
+		
+		Employee emp = new Employee();
+		emp.setEmpId(employee.getEmployeeId());
+		emp.setEmployee_name(employee.getName());
+		emp.setSalaryPerAnum(employee.getSalaryPerAnum());
+		
+		Employee emp1 = repository.updateEmployeeById(emp);
+		
+		EmployeeTo to = new EmployeeTo();
+		to.setEmployeeId(emp1.getEmpId());
+		to.setName(emp1.getEmployee_name());
+		to.setSalaryPerAnum(emp1.getSalaryPerAnum());
+		
+		return to;
+	}
+
+	public EmployeeTo getEmployeeById(Long id) {
+		
+		EmployeeTo to = null;
+		Employee employee = repository.getEmployeeById(id);
+		if(employee != null) {
+			to = new EmployeeTo();
+			to.setEmployeeId(employee.getEmpId());
+			to.setName(employee.getEmployee_name());
+			to.setSalaryPerAnum(employee.getSalaryPerAnum());
+		}
+		return to;
+	}
+
 }

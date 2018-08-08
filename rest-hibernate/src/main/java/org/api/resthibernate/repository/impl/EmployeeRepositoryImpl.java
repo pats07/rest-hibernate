@@ -5,6 +5,7 @@ import java.util.List;
 import org.api.resthibernate.domain.Department;
 import org.api.resthibernate.domain.Employee;
 import org.api.resthibernate.repository.EmployeeRepository;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,11 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 	@Override
 	public List<Employee> retrieveAllEmployee() {
 
-		return null;
+		Session session = sfactory.openSession();
+		Query query = session.createQuery("select emp.empId, emp.employee_name, emp.dept, emp.salaryPerAnum from Employee emp");
+		List<Employee> list = query.list();
+		session.close();
+		return list;
 	}
 
 	@Override
@@ -44,5 +49,27 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 			System.out.println(e);
 		}
 		return dept;
+	}
+
+	@Override
+	public Employee updateEmployeeById(Employee emp) {
+		Session  session = sfactory.openSession();
+		session.beginTransaction();
+		Employee e = session.load(Employee.class, emp.getEmpId());
+		e.setEmployee_name(emp.getEmployee_name());
+		e.setSalaryPerAnum(emp.getSalaryPerAnum());
+		
+		session.update(e);
+		session.getTransaction().commit();
+		session.close();		
+		return e;
+	}
+	
+	@Override
+	public Employee getEmployeeById(Long id) {
+		
+		Session session = sfactory.openSession();
+		Employee employee = session.get(Employee.class, id);
+		return employee;
 	}
 }

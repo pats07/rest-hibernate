@@ -12,5 +12,9 @@ public interface EmployeeRepository {
 	public Long saveEmployee(Employee employee);
 
 	public Department getDepartmentById(Long deptId);
+
+	public Employee updateEmployeeById(Employee emp);
+
+	public Employee getEmployeeById(Long id);
 	
 }
