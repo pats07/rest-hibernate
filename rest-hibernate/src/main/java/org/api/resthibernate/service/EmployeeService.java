@@ -63,4 +63,9 @@ public class EmployeeService {
 		return to;
 	}
 
+	public Employee deleteEmployeeById(Long id) {
+		return repository.deleteEmployeeById(id);
+		
+	}
+
 }

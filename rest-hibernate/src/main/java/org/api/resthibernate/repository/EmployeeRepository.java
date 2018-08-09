@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.api.resthibernate.domain.Department;
 import org.api.resthibernate.domain.Employee;
+import org.api.resthibernate.to.EmployeeTo;
 
 public interface EmployeeRepository {
 
@@ -16,5 +17,7 @@ public interface EmployeeRepository {
 	public Employee updateEmployeeById(Employee emp);
 
 	public Employee getEmployeeById(Long id);
+
+	public Employee deleteEmployeeById(Long id);
 	
 }

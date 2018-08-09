@@ -25,6 +25,9 @@ public class DatabaseConfiguration {
 	private static final String DB_USERNAME = "oracle.db.usrname";
 	private static final String DB_PASSWORD = "oracle.db.password";
 	
+	private static final String HIBERNATE_DDL2AUTO = "hibernate.hbm2ddl.auto";
+	private static final String HIBERNATE_DIALECT = "hibernate.dialect";
+	
 	@Autowired
 	private Environment env;
 	
@@ -56,9 +59,8 @@ public class DatabaseConfiguration {
 
 	private Properties hibernateProperties() {
 		Properties properties = new Properties();
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
-		properties.setProperty("hibernate.dialect",	"org.hibernate.dialect.Oracle10gDialect");
-		properties.setProperty("show_sql", "true");
+		properties.setProperty(HIBERNATE_DDL2AUTO,env.getProperty(HIBERNATE_DDL2AUTO));
+		properties.setProperty(HIBERNATE_DIALECT,	env.getProperty(HIBERNATE_DIALECT));
 		return properties;
 	}
 

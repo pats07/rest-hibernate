@@ -1,5 +1,8 @@
 package org.api.resthibernate.controller;
 
+import java.util.List;
+
+import org.api.resthibernate.domain.Employee;
 import org.api.resthibernate.exception.EmployeNotFoundException;
 import org.api.resthibernate.service.EmployeeService;
 import org.api.resthibernate.to.EmployeeTo;
@@ -10,6 +13,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,17 +48,26 @@ public class EmployeeController {
 		return new ResponseEntity<>(emp, HttpStatus.OK);
 	}
 	
-	/*@GetMapping(name = "/all")
-	@ResponseBody
-	public List<Employee> getAllEmployees() {
+	
+	@GetMapping(name = "/employee")
+	public ResponseEntity<List<Employee>> getAllEmployees() {
 		List<Employee> empList = null;
 		try {
 			empList = service.retrieveAllEmployees();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return empList;
-	}*/
+		return new ResponseEntity<>( empList, HttpStatus.OK);
+	}
+	
+	@DeleteMapping(path="/employee/{id}")
+	public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
+		Employee emp = service.deleteEmployeeById(id);
+		if(emp == null) {
+			throw new EmployeNotFoundException();
+		}
+		return new ResponseEntity<>(emp, HttpStatus.NO_CONTENT);
+	}
 	
 
 	/*@PostMapping("/updateEmployeeById")

@@ -1,5 +1,6 @@
 package org.api.resthibernate.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -8,11 +9,19 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.api.resthibernate.reference.Department;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity(name="Employee")
-public class Employee {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class Employee implements Serializable{
 	
+	
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long empId;
