@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 
-@RestController(value="/employee")
+@RestController
 public class EmployeeController {
 
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
@@ -26,16 +26,16 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService service;
 	
-	@PostMapping(headers="application/json;charset=UTF-8")
-	public ResponseEntity<?> addEmployee(@RequestBody EmployeeTo employee) {
+	@PostMapping(path="/employee")
+	public ResponseEntity<?> addEmployee(@RequestBody EmployeeTo employee, UriComponentsBuilder uriBuilder) {
 		logger.info(employee.toString());;
 		Long id = service.addEmployee(employee);		
-		/*HttpHeaders headers = new HttpHeaders();
-		headers.setLocation( uriBuilder.path("/employee/{id}").buildAndExpand(id).toUri());*/
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		HttpHeaders headers = new HttpHeaders();
+		headers.setLocation( uriBuilder.path("/employee/{id}").buildAndExpand(id).toUri());
+		return new ResponseEntity<>(headers,HttpStatus.CREATED);
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping(path = "/employee/{id}")
 	public ResponseEntity<EmployeeTo> getEmployeeById(@PathVariable("id") Long id) {
 		EmployeeTo emp = service.getEmployeeById(id);
 		if(emp == null) {
